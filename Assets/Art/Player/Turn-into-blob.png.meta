@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d74ba361ea4e28c4cac3f87ff45f218c
+guid: c69c2ccad097ce3408927a77a8a3e088
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle-Spritesheet_0
+      name: Turn-into-blob_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca8413f7279f81441a51969d77769e87
-      internalID: 1599982364
+      spriteID: 22952857162f21644b5db6dab668e5d4
+      internalID: 788712388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Spritesheet_1
+      name: Turn-into-blob_1
       rect:
         serializedVersion: 2
         x: 512
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56fa72ec7676a8745982e628f3e554b1
-      internalID: 1670121824
+      spriteID: 232f62bc97db0a4449a01e48545ce561
+      internalID: -1278774622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Spritesheet_2
+      name: Turn-into-blob_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd950aac4f63e3c4dbb855b3f24e7907
-      internalID: -1057912059
+      spriteID: 8d149bb6cc4931345869fe0ff4a33215
+      internalID: 1754287714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Spritesheet_3
+      name: Turn-into-blob_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48183f88dbcba0547979b9bf4c7bef1b
-      internalID: 635980606
+      spriteID: 3f23ff06c62235f40a34e0203170aad7
+      internalID: -1325585856
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Spritesheet_4
+      name: Turn-into-blob_4
       rect:
         serializedVersion: 2
         x: 0
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72b4fe20e34f5b64fac5ddfed24d23ff
-      internalID: 1787622395
+      spriteID: a00605968618ece4aa20f1659349d9d1
+      internalID: 771562897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Spritesheet_5
+      name: Turn-into-blob_5
       rect:
         serializedVersion: 2
         x: 512
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 308cfc03c9ed16844a51b52c5f64b868
-      internalID: -1145240214
+      spriteID: 0e37023d9bb9fbd43b5aed2a5c0ecc7d
+      internalID: 1762751355
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Spritesheet_6
+      name: Turn-into-blob_6
       rect:
         serializedVersion: 2
         x: 1024
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bd475803821b7a45bcc1a55664cf27e
-      internalID: -1682791652
+      spriteID: 0ab8dda70e55dc843b5a124c099bf5a5
+      internalID: 632359367
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle-Spritesheet_7
+      name: Turn-into-blob_7
       rect:
         serializedVersion: 2
         x: 1536
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ac3e8f96ae9a1c4086640fbbd810d0b
-      internalID: 832123397
+      spriteID: 0109e61672caf0647b730a0dbb1b63aa
+      internalID: -655940041
       vertices: []
       indices: 
       edges: []
@@ -288,14 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idle-Spritesheet_0: 1599982364
-      Idle-Spritesheet_1: 1670121824
-      Idle-Spritesheet_2: -1057912059
-      Idle-Spritesheet_3: 635980606
-      Idle-Spritesheet_4: 1787622395
-      Idle-Spritesheet_5: -1145240214
-      Idle-Spritesheet_6: -1682791652
-      Idle-Spritesheet_7: 832123397
+      Turn-into-blob_0: 788712388
+      Turn-into-blob_1: -1278774622
+      Turn-into-blob_2: 1754287714
+      Turn-into-blob_3: -1325585856
+      Turn-into-blob_4: 771562897
+      Turn-into-blob_5: 1762751355
+      Turn-into-blob_6: 632359367
+      Turn-into-blob_7: -655940041
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
