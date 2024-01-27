@@ -9,21 +9,14 @@ public class MainmenuUI : MonoBehaviour
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private Button closeButton;
-
-    [SerializeField] private GameObject mainButtonsObject;
     [SerializeField] private GameObject optionsObject;
-
     [SerializeField] private EventSystem eventSystem;
 
     private Animator optionsAnimator;
-    private bool optionsShrink = false;
 
     private void Awake()
     {
         optionsAnimator = optionsObject.GetComponent<Animator>();
-
-        //foreach (Transform child in optionsObject.transform)
-        //    child.gameObject.SetActive(false);
 
         // Add event for clicking on play button
         playButton.onClick.AddListener(() =>
@@ -37,12 +30,18 @@ public class MainmenuUI : MonoBehaviour
         {
             print(optionsButton.name + " was pressed!");
 
+            // Set every child active to true in options
             foreach (Transform child in optionsObject.transform)
                 child.gameObject.SetActive(true);
 
-            mainButtonsObject.gameObject.SetActive(false);
+            // Set every child active to false in mainmenu
+            foreach (Transform child in this.transform)
+                child.gameObject.SetActive(false);
+
+            // Set selected button to close button
             eventSystem.SetSelectedGameObject(closeButton.gameObject);
 
+            // Play the expanding animation
             optionsAnimator.Play("Expand");
         });
 
@@ -50,6 +49,7 @@ public class MainmenuUI : MonoBehaviour
         quitButton.onClick.AddListener(() =>
         {
             print(quitButton.name + " was pressed!");
+
             // Exit the application
             Application.Quit();
         });
@@ -58,20 +58,15 @@ public class MainmenuUI : MonoBehaviour
         {
             print(closeButton.name + " was pressed!");
 
-            optionsAnimator.Play("Shrink");
-            optionsShrink = true;
+            // Set every child active to true in mainmenu
+            foreach (Transform child in this.transform)
+                child.gameObject.SetActive(true);
 
-            mainButtonsObject.gameObject.SetActive(true);
+            // Set the selected to options button
             eventSystem.SetSelectedGameObject(optionsButton.gameObject);
-        });
-    }
 
-    private void Update()
-    {
-        if (optionsShrink)
-        {
-            print("Closed!");
-            optionsShrink = false;
-        }
+            // Play the shrinking animation
+            optionsAnimator.Play("Shrink");
+        });
     }
 }
