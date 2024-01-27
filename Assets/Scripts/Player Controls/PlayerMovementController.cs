@@ -14,7 +14,7 @@ public class PlayerMovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -33,8 +33,8 @@ public class PlayerMovementController : MonoBehaviour
             horizontalMovement += Input.GetKey(KeyCode.D) ? 1 : 0;
 
             Vector2 movement = new Vector2(horizontalMovement, verticalMovement);
-            Debug.Log(movement);
-
+            //Debug.Log(movement);
+            facingDirection.x = (movement.x != 0) ? movement.x : facingDirection.x;
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement);
         }
         else
@@ -45,7 +45,8 @@ public class PlayerMovementController : MonoBehaviour
             horizontalMovement += Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
 
             Vector2 movement = new Vector2(horizontalMovement, verticalMovement);
-            Debug.Log(movement);
+            //Debug.Log(movement);
+            facingDirection.x = (movement.x != 0) ? movement.x : facingDirection.x;
 
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement);
         }
