@@ -38,11 +38,13 @@ public class InputRegistry : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         var playerInputManager = FindObjectOfType<PlayerInputManager>();
-        int index = 0;
+        int index = 0;//= 0;
 
+        //playerInputManager.JoinPlayer(index++, -1, "Keyboard&Mouse");
         Debug.Log("Detected " + InputSystem.devices.Count + " devices");
         foreach (var device in InputSystem.devices)
         {
+            Debug.Log("Generating for device " + device.displayName);
             playerInputManager.JoinPlayer(index);
             index++;
         }

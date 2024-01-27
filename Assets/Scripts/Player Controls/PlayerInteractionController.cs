@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static InputRegistry;
 
 public class PlayerInteractionController : MonoBehaviour
 {
@@ -45,8 +46,30 @@ public class PlayerInteractionController : MonoBehaviour
         }
     }
 
+    public void OnSlap()
+    {
+        Debug.Log("Attempting slap");
+        //there is no player to push
+        if (nearbyPlayer == null)
+            return;
+
+        Debug.Log("Slapped");
+
+        Vector2 slapVec = new Vector2(playerMovementController.facingDirection.x * pushingForce, 0f);
+        Debug.Log("slap vec: " + slapVec);
+        nearbyPlayer.AddForce(slapVec);
+    }
+
+    Rigidbody2D nearbyPlayer = null;
+
     private void OnTriggerStay2D(Collider2D collision)
     {
+        nearbyPlayer = collision.attachedRigidbody;
         TryPush(collision.attachedRigidbody);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        nearbyPlayer = null;
     }
 }

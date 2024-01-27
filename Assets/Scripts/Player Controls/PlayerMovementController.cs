@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,7 +24,8 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //tempControllers();
+        if (tempControllersFlag)
+            tempControllers();
         
         m_rigidbody.AddForce(forceApplied);
 
@@ -32,6 +34,8 @@ public class PlayerMovementController : MonoBehaviour
             bool negative = m_rigidbody.velocity.x < 0;
             m_rigidbody.velocity = new Vector2(maxSpeed * (negative ? -1 : 1), m_rigidbody.velocity.y);
         }
+
+        Debug.DrawLine(transform.position, transform.position + new Vector3(facingDirection.x * 5f, facingDirection.y * 5f));
     }
 
     PlayerInput m_playerInput;
@@ -50,21 +54,41 @@ public class PlayerMovementController : MonoBehaviour
     public void OnMove(InputValue value)
     {
         leftStick = value.Get<Vector2>();
+        if (leftStick.magnitude != 0)
+            facingDirection = leftStick.normalized;
         forceApplied.x = leftStick.x * movementForce * Time.deltaTime;
     }
 
+    public bool tempControllersFlag = true;
+    public int tempID = 0;
+
     void tempControllers()
     {
+        if (tempID == 0)
         {
             float horizontalMovement = 0f;
             float verticalMovement = (Input.GetKeyDown(KeyCode.O) && privatePlayerPhysics.canJump) ? 125 : 0;
             horizontalMovement += Input.GetKey(KeyCode.A) ? -1 : 0;
             horizontalMovement += Input.GetKey(KeyCode.D) ? 1 : 0;
 
-            Vector2 movement = new Vector2(horizontalMovement, verticalMovement);
-            //Debug.Log(movement);
+            forceApplied.x = horizontalMovement * Time.deltaTime * movementForce;
+            forceApplied.y = verticalMovement * jumpForce;
 
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement);
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                GetComponent<PlayerInteractionController>().OnSlap();
+            }
         }
+        else
+        {
+            float horizontalMovement = 0f;
+            float verticalMovement = (Input.GetKeyDown(KeyCode.Z) && privatePlayerPhysics.canJump) ? 125 : 0;
+            horizontalMovement += Input.GetKey(KeyCode.LeftArrow) ? -1 : 0;
+            horizontalMovement += Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
+
+            forceApplied.x = horizontalMovement * Time.deltaTime * movementForce;
+            forceApplied.y = verticalMovement * jumpForce;
+        }
+        facingDirection = forceApplied.normalized;
     }
 }
