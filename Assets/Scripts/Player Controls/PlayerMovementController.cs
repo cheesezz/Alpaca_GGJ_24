@@ -5,22 +5,11 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour
 {
     [Tooltip("Which Player will control this player Entity?")]
-    public short playerID = -1;
-
-    public Vector2 facingDirection = Vector2.right;
-
-    short assignedPlayerControllerID = -1;
+    public short playerControllerID = -1;
     // Start is called before the first frame update
     void Start()
     {
         
-    }
-
-    bool initialized = false;
-
-    public void Initialize(int assignedController)
-    {
-
     }
 
     // Update is called once per frame
