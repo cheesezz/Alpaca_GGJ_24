@@ -15,10 +15,13 @@ public class PlayerMovementController : MonoBehaviour
     public Vector2 facingDirection = Vector2.zero;
     Rigidbody2D m_rigidbody;
 
+    SpriteRenderer m_SpriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
+        m_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -54,6 +57,9 @@ public class PlayerMovementController : MonoBehaviour
     public void OnMove(InputValue value)
     {
         leftStick = value.Get<Vector2>();
+        
+        m_SpriteRenderer.flipX = leftStick.x > 0;
+
         if (leftStick.magnitude != 0)
             facingDirection = leftStick.normalized;
         forceApplied.x = leftStick.x * movementForce * Time.deltaTime;

@@ -52,10 +52,13 @@ public class PlayerPhysics : MonoBehaviour
 
     public void OnSlap()
     {
+        
         Vector2 facing = movementController.facingDirection;
         slapObjectContainer = Instantiate(slapObject,
             new Vector2(gameObject.transform.position.x, gameObject.transform.position.y) + facing,
             slapObject.transform.rotation, transform);
+
+        AudioManager.instance.PlaySFX(AudioManager.AvailableSFX.Slap);
     }
 
     /// <summary>
