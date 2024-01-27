@@ -8,7 +8,7 @@ public static class Loader
     {
         MainmenuScene,
         LoadingScene,
-        SampleScene
+        JoinRoom
     }
 
     private static Scene targetScene;   // Store scene to load after loading scene

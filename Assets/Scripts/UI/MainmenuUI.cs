@@ -16,19 +16,20 @@ public class MainmenuUI : MonoBehaviour
     [SerializeField] private EventSystem eventSystem;
 
     private Animator optionsAnimator;
+    private bool optionsShrink = false;
 
     private void Awake()
     {
         optionsAnimator = optionsObject.GetComponent<Animator>();
 
-        foreach (Transform child in optionsObject.transform)
-            child.gameObject.SetActive(false);
+        //foreach (Transform child in optionsObject.transform)
+        //    child.gameObject.SetActive(false);
 
         // Add event for clicking on play button
         playButton.onClick.AddListener(() =>
         {
             // Call Loader function to load game
-            Loader.LoadScene(Loader.Scene.SampleScene);
+            Loader.LoadScene(Loader.Scene.JoinRoom);
         });
 
         // Add event for clicking on options button
@@ -42,7 +43,6 @@ public class MainmenuUI : MonoBehaviour
             mainButtonsObject.gameObject.SetActive(false);
             eventSystem.SetSelectedGameObject(closeButton.gameObject);
 
-            //print(optionsAnimator.name);
             optionsAnimator.Play("Expand");
         });
 
@@ -58,12 +58,20 @@ public class MainmenuUI : MonoBehaviour
         {
             print(closeButton.name + " was pressed!");
 
-            foreach (Transform child in optionsObject.transform)
-                child.gameObject.SetActive(false);
+            optionsAnimator.Play("Shrink");
+            optionsShrink = true;
 
             mainButtonsObject.gameObject.SetActive(true);
             eventSystem.SetSelectedGameObject(optionsButton.gameObject);
         });
+    }
 
+    private void Update()
+    {
+        if (optionsShrink)
+        {
+            print("Closed!");
+            optionsShrink = false;
+        }
     }
 }
