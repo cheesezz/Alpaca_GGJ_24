@@ -152,7 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725b85c42a29a624488e5a70ab2f24a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiJoinList: []
   gameRunning: 0
+  connectedDevices: 
 --- !u!4 &67373213
 Transform:
   m_ObjectHideFlags: 0
@@ -460,8 +462,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1963781109}
-  - component: {fileID: 1963781108}
   - component: {fileID: 1963781110}
+  - component: {fileID: 1963781111}
   m_Layer: 0
   m_Name: LevelManagers
   m_TagString: Untagged
@@ -469,18 +471,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1963781108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963781107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48586c8f832c51e48bcae9c0f6853733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1963781109
 Transform:
   m_ObjectHideFlags: 0
@@ -505,16 +495,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1963781107}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: fffc1357c65569d49afb0dcf2cf5a896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: 0}
+--- !u!114 &1963781111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963781107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
+  m_MaxPlayerCount: 4
+  m_AllowJoining: 1
+  m_JoinBehavior: 0
+  m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_DeviceRegainedEvent:
+  m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
   m_ControlsChangedEvent:
