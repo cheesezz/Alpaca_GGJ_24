@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3869450677025164164}
   - component: {fileID: 1262486123680273214}
   - component: {fileID: 4317329417168930206}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Slap
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1951536099801387217}
   - component: {fileID: 873553437955688116}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
