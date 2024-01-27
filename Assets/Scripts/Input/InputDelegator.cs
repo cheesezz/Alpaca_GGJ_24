@@ -20,6 +20,7 @@ public class InputDelegator : MonoBehaviour
         }
 
         // Check how many controllers is there
+
     }
 
     // Update is called once per frame
