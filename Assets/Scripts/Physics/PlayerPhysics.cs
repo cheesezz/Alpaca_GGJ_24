@@ -15,12 +15,14 @@ public class PlayerPhysics : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (movementController == null)
+            movementController = GetComponent<PlayerMovementController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        return;
         switch (movementController.playerControllerID)
         {
             case 0:
@@ -46,6 +48,14 @@ public class PlayerPhysics : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void OnSlap()
+    {
+        Vector2 facing = movementController.facingDirection;
+        slapObjectContainer = Instantiate(slapObject,
+            new Vector2(gameObject.transform.position.x, gameObject.transform.position.y) + facing,
+            slapObject.transform.rotation, transform);
     }
 
     /// <summary>

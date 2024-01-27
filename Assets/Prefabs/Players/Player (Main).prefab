@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 996738557054654556}
   - component: {fileID: -3940256682961561646}
   m_Layer: 0
-  m_Name: Player 1 (Main)
+  m_Name: Player (Main)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -364,6 +364,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ad0a963bb94bc42871b6759a94c111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementController: {fileID: 3809755241895223270}
+  slapObject: {fileID: 6611210377252581566, guid: 1d78d3b368316f8449a9983a773840ef, type: 3}
+  slapObjectContainer: {fileID: 0}
+  slapForce: 500
+  slapVertical: 0.1
   canJump: 0
 --- !u!114 &-3940256682961561646
 MonoBehaviour:
