@@ -9,6 +9,8 @@ public class PlayerMovementController : MonoBehaviour
 
     [SerializeField] private PlayerPhysics privatePlayerPhysics;
 
+    public Vector2 facingDirection = Vector2.zero;
+
     // Start is called before the first frame update
     void Start()
     {
