@@ -133,6 +133,5 @@ public class InputRegistry : MonoBehaviour
             default:
                 break;
         }
-        Debug.Log("concurrent controllers connected: " + connectedDevices.Count);
     }
 }
