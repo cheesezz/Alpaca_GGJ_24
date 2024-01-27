@@ -6,6 +6,9 @@ public class PlayerMovementController : MonoBehaviour
 {
     [Tooltip("Which Player will control this player Entity?")]
     public short playerControllerID = -1;
+
+    [SerializeField] private PlayerPhysics privatePlayerPhysics;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,7 @@ public class PlayerMovementController : MonoBehaviour
         if (playerControllerID == 0)
         {
             float horizontalMovement = 0f;
-            float verticalMovement = Input.GetKeyDown(KeyCode.O) ? 125 : 0;
+            float verticalMovement = (Input.GetKeyDown(KeyCode.O) && privatePlayerPhysics.canJump) ? 125 : 0;
             horizontalMovement += Input.GetKey(KeyCode.A) ? -1 : 0;
             horizontalMovement += Input.GetKey(KeyCode.D) ? 1 : 0;
 
@@ -35,7 +38,7 @@ public class PlayerMovementController : MonoBehaviour
         else
         {
             float horizontalMovement = 0f;
-            float verticalMovement = Input.GetKeyDown(KeyCode.Z) ? 125 : 0;
+            float verticalMovement = (Input.GetKeyDown(KeyCode.Z) && privatePlayerPhysics.canJump) ? 125 : 0;
             horizontalMovement += Input.GetKey(KeyCode.LeftArrow) ? -1 : 0;
             horizontalMovement += Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
 
