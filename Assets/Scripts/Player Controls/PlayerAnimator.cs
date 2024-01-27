@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -15,5 +16,13 @@ public class PlayerAnimator : MonoBehaviour
     public void OnSlap()
     {
         m_animator.SetTrigger("Slam Attack");
+    }
+
+    public void OnMove(InputValue value)
+    {
+        Vector2 leftStick = value.Get<Vector2>();
+
+        bool moving = leftStick.magnitude > 0f;
+        m_animator.SetBool("Moving", moving);
     }
 }
