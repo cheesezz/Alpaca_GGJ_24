@@ -42,7 +42,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public void OnJump()
     {
-        m_rigidbody.AddForce(new Vector2(0, jumpForce));
+        if (privatePlayerPhysics.canJump) m_rigidbody.AddForce(new Vector2(0, jumpForce));
     }
 
     Vector2 forceApplied = Vector2.zero;
