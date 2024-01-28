@@ -13,8 +13,10 @@ public class PlayerPhysics : MonoBehaviour
     private bool slapNow = false;
     private bool slamNow = false;
     public bool canJump = false;
+    public bool isStunned = false;
 
     private Rigidbody2D m_rigidbody;
+    private PlayerAnimator m_animator;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,7 @@ public class PlayerPhysics : MonoBehaviour
             movementController = GetComponent<PlayerMovementController>();
 
         m_rigidbody = GetComponent<Rigidbody2D>();
+        m_animator = GetComponent<PlayerAnimator>();
 
         playerSizeTimesTwo = transform.lossyScale.x * 2;
     }
@@ -30,6 +33,10 @@ public class PlayerPhysics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if ( currentStunDuration >= 0)
+        {
+            currentStunDuration -= Time.deltaTime;
+        }
         return;
         switch (movementController.playerControllerID)
         {
@@ -62,6 +69,8 @@ public class PlayerPhysics : MonoBehaviour
 
     public void OnSlap()
     {
+        if (isStunned) return;
+
         Vector2 facing = movementController.facingDirection;
         if (slapObjectContainer != null) { return; }
 
@@ -88,6 +97,7 @@ public class PlayerPhysics : MonoBehaviour
                     Debug.Log("Slapping Someone!");
                     player.m_rigidbody.AddForce(fromOtherToThis * slapForce);
                     hasSlappedSomeone = true;
+                    StartCoroutine(player.FlyingFromSlapOrSlam());
                 }
             }
         }
@@ -97,8 +107,27 @@ public class PlayerPhysics : MonoBehaviour
         //slapNow = true;
     }
 
+    const float minStunDuration = 0.8f;
+    float currentStunDuration = 0f;
+
+    IEnumerator FlyingFromSlapOrSlam()
+    {
+        m_animator.IsFlying(true);
+        movementController.canMove = false;
+        isStunned = true;
+        currentStunDuration = minStunDuration;
+
+        yield return new WaitUntil(() => canJump == true || currentStunDuration <= 0f);
+        m_animator.IsFlying(false);
+        movementController.canMove = true;
+        isStunned = false;
+
+    }
+
     public void OnSlam()
     {
+        if (isStunned) return;
+
         Vector2 facing = movementController.facingDirection;
         if (slapObjectContainer != null) { return; }
 
@@ -111,7 +140,10 @@ public class PlayerPhysics : MonoBehaviour
 
     public void OnJump()
     {
-        canJump = false;
+        if (isStunned) return;
+
+        if (canJump)
+            canJump = false;
     }
 
     /// <summary>

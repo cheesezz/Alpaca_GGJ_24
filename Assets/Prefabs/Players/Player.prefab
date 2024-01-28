@@ -500,6 +500,8 @@ MonoBehaviour:
   playerControllerID: 0
   privatePlayerPhysics: {fileID: 996738557054654556}
   facingDirection: {x: 0, y: 0}
+  canMove: 1
+  keyboardControls: 0
   maxSpeed: 5
   movementForce: 1500
   jumpForce: 350
@@ -547,7 +549,7 @@ MonoBehaviour:
   movementController: {fileID: 3809755241895223270}
   slapObject: {fileID: 6611210377252581566, guid: 1d78d3b368316f8449a9983a773840ef, type: 3}
   slapObjectContainer: {fileID: 0}
-  slapForce: 3000
+  slapForce: 1800
   slapVertical: 0.1
   canJump: 0
 --- !u!114 &-3940256682961561646
