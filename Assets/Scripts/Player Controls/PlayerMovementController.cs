@@ -33,10 +33,13 @@ public class PlayerMovementController : MonoBehaviour
         //     GetComponent<PlayerInput>().SwitchCurrentControlScheme(Gamepad.all[0]);
         // }
     }
+    SpriteRenderer m_SpriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_rigidbody = GetComponent<Rigidbody2D>();
+        m_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -72,8 +75,12 @@ public class PlayerMovementController : MonoBehaviour
     public void OnMove(InputValue value)
     {
         leftStick = value.Get<Vector2>();
+        
         if (leftStick.magnitude != 0)
             facingDirection = leftStick.normalized;
+
+        m_SpriteRenderer.flipX = facingDirection.x > 0;
+
         forceApplied.x = leftStick.x * movementForce * Time.deltaTime;
     }
 
