@@ -35,25 +35,27 @@ public class ButtonController : MonoBehaviour
         if (mechanismDir.x != 0f) 
         {
             buttonObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-mechanismDir.x * .1f, 0f));
-            Debug.Log("Button Resetting X");
+            //Debug.Log("Button Resetting X");
         }
 
         if (mechanismDir.y != 0f) 
         {
             buttonObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, -mechanismDir.y * .1f));
-            Debug.Log("Button Resetting Y");
+            //Debug.Log("Button Resetting Y");
         }
-
-        door.isTriggered = go.isTriggered;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == 9) go.isTriggered = true;
+
+        door.isTriggered = go.isTriggered;
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer == 9) go.isTriggered = false;
+
+        door.isTriggered = go.isTriggered;
     }
 }
