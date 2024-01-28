@@ -58,10 +58,11 @@ public class PlayerMovementController : MonoBehaviour
     {
         leftStick = value.Get<Vector2>();
         
-        m_SpriteRenderer.flipX = leftStick.x > 0;
-
         if (leftStick.magnitude != 0)
             facingDirection = leftStick.normalized;
+
+        m_SpriteRenderer.flipX = facingDirection.x > 0;
+
         forceApplied.x = leftStick.x * movementForce * Time.deltaTime;
     }
 
