@@ -12,10 +12,10 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         LevelManager lvlman = FindObjectOfType<LevelManager>();
-        p1 = lvlman.p1;
-        p2 = lvlman.p2;
-        p3 = lvlman.p3;
-        p4 = lvlman.p4;
+        p1 = lvlman.players[0];
+        p2 = lvlman.players[1];
+        p3 = lvlman.players[2];
+        p4 = lvlman.players[3];
 
         StartCoroutine(DelayCheckForPlayers());
     }
