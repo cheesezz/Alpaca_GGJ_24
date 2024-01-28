@@ -34,6 +34,14 @@ public class PlayerAnimator : MonoBehaviour
         m_animator.SetBool("isSlapped", val);
     }
 
+    public void OnFart()
+    {
+        if (m_playerPhysics.isStunned) return;
+
+        m_animator.SetTrigger("Fart");
+        AudioManager.instance.PlaySFX(AudioManager.AvailableSFX.Fart);
+    }
+
     public void OnMove(InputValue value)
     {
         if (m_playerPhysics.isStunned) return;

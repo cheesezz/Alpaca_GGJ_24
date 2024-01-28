@@ -22,11 +22,13 @@ public class AudioManager : MonoBehaviour
     {
         Slap,
         Slam,
+        Fart,
         TOTAL
     }
 
     public AudioSource slapAS;
     public AudioSource slamAS;
+    public AudioSource fartAS;
 
     public void PlaySFX(AvailableSFX sfx)
     {
@@ -43,6 +45,9 @@ public class AudioManager : MonoBehaviour
                 {
                     slamAS.Play();
                 }
+                break;
+            case AvailableSFX.Fart:
+                fartAS.Play();
                 break;
         }
     }
