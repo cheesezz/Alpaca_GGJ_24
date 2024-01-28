@@ -13,8 +13,27 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private PlayerPhysics privatePlayerPhysics;
 
     public Vector2 facingDirection = Vector2.zero;
+    public bool canMove = true;
     Rigidbody2D m_rigidbody;
 
+    [SerializeField] bool keyboardControls = false;
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        m_rigidbody = GetComponent<Rigidbody2D>();
+        // if (keyboardControls)
+        // {
+        //     InputDevice[] input = new InputDevice[] { Keyboard.current, Mouse.current };
+        //     GetComponent<PlayerInput>().SwitchCurrentControlScheme(input);
+        // }
+        // else
+        // {
+        //     GetComponent<PlayerInput>().SwitchCurrentControlScheme(Gamepad.all[0]);
+        // }
+    }
     SpriteRenderer m_SpriteRenderer;
 
     // Start is called before the first frame update
@@ -27,6 +46,8 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canMove) return;
+
         if (tempControllersFlag)
             tempControllers();
         
@@ -58,10 +79,11 @@ public class PlayerMovementController : MonoBehaviour
     {
         leftStick = value.Get<Vector2>();
         
-        m_SpriteRenderer.flipX = leftStick.x > 0;
-
         if (leftStick.magnitude != 0)
             facingDirection = leftStick.normalized;
+
+        m_SpriteRenderer.flipX = facingDirection.x > 0;
+
         forceApplied.x = leftStick.x * movementForce * Time.deltaTime;
     }
 

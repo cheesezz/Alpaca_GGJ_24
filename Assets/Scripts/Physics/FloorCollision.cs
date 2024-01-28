@@ -8,7 +8,7 @@ public class FloorCollision : MonoBehaviour
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == 8 || other.gameObject.layer == 9)
         {
             playerPhysics.canJump = true;
         }
@@ -16,7 +16,7 @@ public class FloorCollision : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == 8 || other.gameObject.layer == 9)
         {
             playerPhysics.canJump = false;
         }

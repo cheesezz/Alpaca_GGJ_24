@@ -107,7 +107,7 @@ public class InputRegistry : MonoBehaviour
         switch (change)
         {
             case InputDeviceChange.Added:
-                Debug.Log("Added Controller " + device.deviceId);
+                //Debug.Log("Added Controller " + device.deviceId);
                 connectedDevices.Add(device.deviceId);
                 break;
 
@@ -126,7 +126,7 @@ public class InputRegistry : MonoBehaviour
                 break;
 
             case InputDeviceChange.Removed:
-                Debug.LogWarning("Controller Removed " + device.deviceId);
+                //Debug.LogWarning("Controller Removed " + device.deviceId);
                 connectedDevices.Remove(device.deviceId);
                 break;
 

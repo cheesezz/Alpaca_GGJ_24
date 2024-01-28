@@ -6,24 +6,37 @@ public class PlayerPhysics : MonoBehaviour
 {
     [SerializeField] private PlayerMovementController movementController;
     [SerializeField] private GameObject slapObject, slapObjectContainer;
-    [Range(1f, 1000f)]
+    [Range(1f, 10000f)]
     [SerializeField] float slapForce = 500f;
     [Range(0.01f, 1f)]
     [SerializeField] float slapVertical = 0.1f;
     private bool slapNow = false;
     private bool slamNow = false;
     public bool canJump = false;
+    public bool isStunned = false;
+
+    private Rigidbody2D m_rigidbody;
+    private PlayerAnimator m_animator;
 
     // Start is called before the first frame update
     void Start()
     {
         if (movementController == null)
             movementController = GetComponent<PlayerMovementController>();
+
+        m_rigidbody = GetComponent<Rigidbody2D>();
+        m_animator = GetComponent<PlayerAnimator>();
+
+        playerSizeTimesTwo = transform.lossyScale.x * 2;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if ( currentStunDuration >= 0)
+        {
+            currentStunDuration -= Time.deltaTime;
+        }
         return;
         switch (movementController.playerControllerID)
         {
@@ -52,23 +65,71 @@ public class PlayerPhysics : MonoBehaviour
         }
     }
 
+    float playerSizeTimesTwo = 0f;
+
     public void OnSlap()
     {
+        if (isStunned) return;
 
         Vector2 facing = new Vector2(movementController.facingDirection.x, 0f).normalized;
+
         if (slapObjectContainer != null) { return; }
 
-        Debug.Log("Slapping!");
+        Debug.Log("Attempting Slapping!");
         slapObjectContainer = Instantiate(slapObject,
             new Vector2(gameObject.transform.position.x, gameObject.transform.position.y) + facing,
             slapObject.transform.rotation, transform);
 
-        slapNow = true;
+        var e = FindObjectsOfType<PlayerPhysics>();
+        bool hasSlappedSomeone = false;
+        foreach (var player in e)
+        {
+            if (player == this)
+                continue;
+
+            Vector3 fromOtherToThis = player.transform.position - transform.position;
+            float distanceFromOtherPlayer = fromOtherToThis.magnitude;
+
+            if (Mathf.Abs(distanceFromOtherPlayer) <= playerSizeTimesTwo)
+            {
+                fromOtherToThis.Normalize();
+                if (Vector3.Angle(fromOtherToThis, movementController.facingDirection) < 40f) // 40f is max angle
+                {
+                    Debug.Log("Slapping Someone!");
+                    player.m_rigidbody.AddForce(fromOtherToThis * slapForce);
+                    hasSlappedSomeone = true;
+                    StartCoroutine(player.FlyingFromSlapOrSlam());
+                }
+            }
+        }
+        if (hasSlappedSomeone)
+            AudioManager.instance.PlaySFX(AudioManager.AvailableSFX.Slap);
+
+        //slapNow = true;
+    }
+
+    const float minStunDuration = 0.8f;
+    float currentStunDuration = 0f;
+
+    IEnumerator FlyingFromSlapOrSlam()
+    {
+        m_animator.IsFlying(true);
+        movementController.canMove = false;
+        isStunned = true;
+        currentStunDuration = minStunDuration;
+
+        yield return new WaitUntil(() => canJump == true || currentStunDuration <= 0f);
+        m_animator.IsFlying(false);
+        movementController.canMove = true;
+        isStunned = false;
+
     }
 
     public void OnSlam()
     {
         //Vector2 facing = movementController.facingDirection;
+        if (isStunned) return;
+
         Vector2 facing = new Vector2(movementController.facingDirection.x, 0f).normalized;
         if (slapObjectContainer != null) { return; }
 
@@ -76,7 +137,15 @@ public class PlayerPhysics : MonoBehaviour
         slapObjectContainer = Instantiate(slapObject, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y) + facing, slapObject.transform.rotation, transform);
 
         slamNow = true;
-        AudioManager.instance.PlaySFX(AudioManager.AvailableSFX.Slap);
+        AudioManager.instance.PlaySFX(AudioManager.AvailableSFX.Slam);
+    }
+
+    public void OnJump()
+    {
+        if (isStunned) return;
+
+        if (canJump)
+            canJump = false;
     }
 
     /// <summary>
@@ -98,6 +167,10 @@ public class PlayerPhysics : MonoBehaviour
                 Slam(other);
                 slamNow = false;
             }
+        }
+        if (other.gameObject.layer == 8)
+        {
+            canJump = true;
         }
     }
 
