@@ -57,6 +57,7 @@ public class CameraController : MonoBehaviour
     void CheckForPlayers()
     {
         var e = FindObjectsOfType<PlayerInput>();
+        int index = 0;
         foreach (PlayerInput p in e)
         {
             switch (p.playerIndex)
@@ -75,7 +76,9 @@ public class CameraController : MonoBehaviour
                     break;
 
             }
+            index++;
         }
+        playerCount = index;
     }
 
     Vector3 newPosition = new Vector3(0,0,-1f);

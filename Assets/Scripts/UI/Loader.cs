@@ -8,7 +8,8 @@ public static class Loader
     {
         MainmenuScene,
         LoadingScene,
-        JoinRoom
+        JoinRoom,
+        DemoGameScene
     }
 
     private static Scene targetScene;   // Store scene to load after loading scene
@@ -17,6 +18,11 @@ public static class Loader
     {
         targetScene = scene;                                    // Sets scene to load later
         SceneManager.LoadScene(Scene.LoadingScene.ToString());  // Load the loading scene
+    }
+
+    public static void LoadAdditiveScene(Scene scene)
+    {
+        SceneManager.LoadScene(scene.ToString(), LoadSceneMode.Additive);
     }
 
     public static void LoaderCallback()

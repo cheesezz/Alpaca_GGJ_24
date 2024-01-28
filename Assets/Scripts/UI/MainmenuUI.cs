@@ -29,7 +29,7 @@ public class MainmenuUI : MonoBehaviour
         playButton.onClick.AddListener(() =>
         {
             // Call Loader function to load game
-            Loader.LoadScene(Loader.Scene.JoinRoom);
+            Loader.LoadScene(Loader.Scene.DemoGameScene);
         });
 
         // Add event for clicking on options button
