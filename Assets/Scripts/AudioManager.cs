@@ -21,10 +21,12 @@ public class AudioManager : MonoBehaviour
     public enum AvailableSFX
     {
         Slap,
+        Slam,
         TOTAL
     }
 
     public AudioSource slapAS;
+    public AudioSource slamAS;
 
     public void PlaySFX(AvailableSFX sfx)
     {
@@ -34,6 +36,12 @@ public class AudioManager : MonoBehaviour
                 if (!slapAS.isPlaying)
                 {
                     slapAS.Play();
+                }
+                break;
+            case AvailableSFX.Slam:
+                if (!slamAS.isPlaying)
+                {
+                    slamAS.Play();
                 }
                 break;
         }

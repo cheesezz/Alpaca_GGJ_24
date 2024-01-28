@@ -15,6 +15,11 @@ public class PlayerAnimator : MonoBehaviour
 
     public void OnSlap()
     {
+        m_animator.SetTrigger("Slapping");
+    }
+
+    public void OnSlam()
+    {
         m_animator.SetTrigger("Slam Attack");
     }
 
