@@ -13,6 +13,7 @@ public class PlayerInteractionController : MonoBehaviour
     [Range(1f, 1000f)]
     [SerializeField] float pushingForce;
 
+    Rigidbody2D nearbyPlayer = null;
 
     // Start is called before the first frame update
     void Start()
@@ -53,19 +54,18 @@ public class PlayerInteractionController : MonoBehaviour
         if (nearbyPlayer == null)
             return;
 
-        Debug.Log("Slapped");
 
         Vector2 slapVec = new Vector2(playerMovementController.facingDirection.x * pushingForce, 0f);
         Debug.Log("slap vec: " + slapVec);
         nearbyPlayer.AddForce(slapVec);
+        Debug.Log("Slapped");
     }
 
-    Rigidbody2D nearbyPlayer = null;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         nearbyPlayer = collision.attachedRigidbody;
-        TryPush(collision.attachedRigidbody);
+        TryPush(nearbyPlayer);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
