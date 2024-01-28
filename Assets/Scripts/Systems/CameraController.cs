@@ -7,7 +7,7 @@ using Unity.Mathematics;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private GameObject p1, p2, p3, p4;
-    private int playerCount = -2;
+    private int playerCount = 2;
     // Start is called before the first frame update
     void Start()
     {

@@ -10,6 +10,15 @@ public class ButtonController : MonoBehaviour
     [SerializeField] GameObject buttonObject;
     [SerializeField] bool isTriggered = false;
 
+    void Awake()
+    {
+        door = go.door;
+        untriggeredPos = go.untriggeredPos;
+        triggeredPos = go.triggeredPos;
+        originalPos = go.originalPos;
+        buttonObject = go.buttonObject;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +43,8 @@ public class ButtonController : MonoBehaviour
             buttonObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, -mechanismDir.y * .1f));
             Debug.Log("Button Resetting Y");
         }
+
+        door.isTriggered = go.isTriggered;
     }
 
     void OnTriggerEnter2D(Collider2D other)
