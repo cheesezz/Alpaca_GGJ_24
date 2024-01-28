@@ -13,6 +13,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private PlayerPhysics privatePlayerPhysics;
 
     public Vector2 facingDirection = Vector2.zero;
+    public bool canMove = true;
     Rigidbody2D m_rigidbody;
 
     [SerializeField] bool keyboardControls = false;
@@ -45,6 +46,8 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canMove) return;
+
         if (tempControllersFlag)
             tempControllers();
         
