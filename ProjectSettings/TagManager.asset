@@ -14,7 +14,7 @@ TagManager:
   - BodyCollider
   - InteractionCollider
   - LevelCollider
-  - 
+  - Interactables
   - 
   - 
   - 
