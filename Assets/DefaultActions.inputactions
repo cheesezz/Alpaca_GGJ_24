@@ -1,5 +1,5 @@
 {
-    "name": "inputActionAsset",
+    "name": "DefaultActions",
     "maps": [
         {
             "name": "Player",
@@ -27,6 +27,15 @@
                     "name": "Slap",
                     "type": "Button",
                     "id": "b0ce56e4-abf7-4c83-a3d3-3923d21009ce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Slam",
+                    "type": "Button",
+                    "id": "7d1336cf-7309-4f37-977e-1c4e8d762fe8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -196,6 +205,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Slap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec97c0c4-8f61-4971-8d62-ac48a9955693",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Slam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
