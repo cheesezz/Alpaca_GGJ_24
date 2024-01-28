@@ -54,8 +54,8 @@ public class PlayerPhysics : MonoBehaviour
 
     public void OnSlap()
     {
-        
-        Vector2 facing = movementController.facingDirection;
+
+        Vector2 facing = new Vector2(movementController.facingDirection.x, 0f).normalized;
         if (slapObjectContainer != null) { return; }
 
         Debug.Log("Slapping!");
@@ -68,7 +68,8 @@ public class PlayerPhysics : MonoBehaviour
 
     public void OnSlam()
     {
-        Vector2 facing = movementController.facingDirection;
+        //Vector2 facing = movementController.facingDirection;
+        Vector2 facing = new Vector2(movementController.facingDirection.x, 0f).normalized;
         if (slapObjectContainer != null) { return; }
 
         Debug.Log("Slamming!");

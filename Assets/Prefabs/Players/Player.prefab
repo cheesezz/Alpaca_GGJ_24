@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 996738557054654556}
   - component: {fileID: -3940256682961561646}
   - component: {fileID: -5113099766605347766}
+  - component: {fileID: 5551359940652209880}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -251,7 +252,7 @@ MonoBehaviour:
   facingDirection: {x: 0, y: 0}
   maxSpeed: 5
   movementForce: 1500
-  jumpForce: 350
+  jumpForce: 500
   tempControllersFlag: 0
   tempID: 0
 --- !u!50 &4462357393111601830
@@ -341,3 +342,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ac904b6904c354b8b91cbd66684427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5551359940652209880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8941243923601993904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e806f2badb552a4697cbe38a3b9cee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPhysics: {fileID: 996738557054654556}
