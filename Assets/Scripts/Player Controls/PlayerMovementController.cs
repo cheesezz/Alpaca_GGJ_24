@@ -15,10 +15,28 @@ public class PlayerMovementController : MonoBehaviour
     public Vector2 facingDirection = Vector2.zero;
     Rigidbody2D m_rigidbody;
 
+    [SerializeField] bool keyboardControls = false;
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        m_rigidbody = GetComponent<Rigidbody2D>();
+        // if (keyboardControls)
+        // {
+        //     InputDevice[] input = new InputDevice[] { Keyboard.current, Mouse.current };
+        //     GetComponent<PlayerInput>().SwitchCurrentControlScheme(input);
+        // }
+        // else
+        // {
+        //     GetComponent<PlayerInput>().SwitchCurrentControlScheme(Gamepad.all[0]);
+        // }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        m_rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
