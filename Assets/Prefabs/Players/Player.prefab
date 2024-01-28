@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6107295341587456922
 Transform:
   m_ObjectHideFlags: 0
@@ -298,7 +298,6 @@ Transform:
   - {fileID: 8986454461692376554}
   - {fileID: 3197035776438428293}
   - {fileID: 6107295341587456922}
-  - {fileID: 4498533632432043787}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4356242864888525760
@@ -375,7 +374,7 @@ MonoBehaviour:
   movementController: {fileID: 3809755241895223270}
   slapObject: {fileID: 6611210377252581566, guid: 1d78d3b368316f8449a9983a773840ef, type: 3}
   slapObjectContainer: {fileID: 0}
-  slapForce: 500
+  slapForce: 3000
   slapVertical: 0.1
   canJump: 0
 --- !u!114 &-3940256682961561646

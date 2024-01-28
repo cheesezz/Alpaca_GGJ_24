@@ -6,7 +6,7 @@ public class PlayerPhysics : MonoBehaviour
 {
     [SerializeField] private PlayerMovementController movementController;
     [SerializeField] private GameObject slapObject, slapObjectContainer;
-    [Range(1f, 1000f)]
+    [Range(1f, 10000f)]
     [SerializeField] float slapForce = 500f;
     [Range(0.01f, 1f)]
     [SerializeField] float slapVertical = 0.1f;
@@ -14,11 +14,17 @@ public class PlayerPhysics : MonoBehaviour
     private bool slamNow = false;
     public bool canJump = false;
 
+    private Rigidbody2D m_rigidbody;
+
     // Start is called before the first frame update
     void Start()
     {
         if (movementController == null)
             movementController = GetComponent<PlayerMovementController>();
+
+        m_rigidbody = GetComponent<Rigidbody2D>();
+
+        playerSizeTimesTwo = transform.lossyScale.x * 2;
     }
 
     // Update is called once per frame
@@ -52,18 +58,42 @@ public class PlayerPhysics : MonoBehaviour
         }
     }
 
+    float playerSizeTimesTwo = 0f;
+
     public void OnSlap()
     {
-        
         Vector2 facing = movementController.facingDirection;
         if (slapObjectContainer != null) { return; }
 
-        Debug.Log("Slapping!");
+        Debug.Log("Attempting Slapping!");
         slapObjectContainer = Instantiate(slapObject,
             new Vector2(gameObject.transform.position.x, gameObject.transform.position.y) + facing,
             slapObject.transform.rotation, transform);
 
-        slapNow = true;
+        var e = FindObjectsOfType<PlayerPhysics>();
+        bool hasSlappedSomeone = false;
+        foreach (var player in e)
+        {
+            if (player == this)
+                continue;
+
+            Vector3 fromOtherToThis = player.transform.position - transform.position;
+            float distanceFromOtherPlayer = fromOtherToThis.magnitude;
+
+            if (Mathf.Abs(distanceFromOtherPlayer) <= playerSizeTimesTwo)
+            {
+                fromOtherToThis.Normalize();
+                bool facingCorrectDirection = Mathf.Abs(fromOtherToThis.x) < Mathf.Abs(fromOtherToThis.x + movementController.facingDirection.x);
+
+                Debug.Log("Slapping Someone!");
+                player.m_rigidbody.AddForce(fromOtherToThis * slapForce);
+                hasSlappedSomeone = true;
+            }
+        }
+        if (hasSlappedSomeone)
+            AudioManager.instance.PlaySFX(AudioManager.AvailableSFX.Slap);
+
+        //slapNow = true;
     }
 
     public void OnSlam()
@@ -75,7 +105,12 @@ public class PlayerPhysics : MonoBehaviour
         slapObjectContainer = Instantiate(slapObject, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y) + facing, slapObject.transform.rotation, transform);
 
         slamNow = true;
-        AudioManager.instance.PlaySFX(AudioManager.AvailableSFX.Slap);
+        AudioManager.instance.PlaySFX(AudioManager.AvailableSFX.Slam);
+    }
+
+    public void OnJump()
+    {
+        canJump = false;
     }
 
     /// <summary>
@@ -97,6 +132,10 @@ public class PlayerPhysics : MonoBehaviour
                 Slam(other);
                 slamNow = false;
             }
+        }
+        if (other.gameObject.layer == 8)
+        {
+            canJump = true;
         }
     }
 
