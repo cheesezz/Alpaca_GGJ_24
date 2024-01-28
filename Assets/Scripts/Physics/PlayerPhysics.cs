@@ -118,7 +118,7 @@ public class PlayerPhysics : MonoBehaviour
         isStunned = true;
         currentStunDuration = minStunDuration;
 
-        yield return new WaitUntil(() => canJump == true || currentStunDuration <= 0f);
+        yield return new WaitUntil(() => currentStunDuration <= 0f);
         m_animator.IsFlying(false);
         movementController.canMove = true;
         isStunned = false;

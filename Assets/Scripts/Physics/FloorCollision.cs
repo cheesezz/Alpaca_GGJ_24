@@ -18,7 +18,7 @@ public class FloorCollision : MonoBehaviour
     {
         if (other.gameObject.layer == 8 || other.gameObject.layer == 9)
         {
-            playerPhysics.canJump = false;
+            //playerPhysics.canJump = false;
         }
     }
 }

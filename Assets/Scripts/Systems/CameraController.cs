@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class CameraController : MonoBehaviour
 
     IEnumerator DelayCheckForPlayers()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.1f);
 
         var e = FindObjectsOfType<PlayerEntity>();
         int index = 0;
@@ -53,11 +54,40 @@ public class CameraController : MonoBehaviour
         playerCount = index;
     }
 
+    void CheckForPlayers()
+    {
+        var e = FindObjectsOfType<PlayerInput>();
+        foreach (PlayerInput p in e)
+        {
+            switch (p.playerIndex)
+            {
+                case 0:
+                    p1 = p.gameObject;
+                    break;
+                case 1:
+                    p2 = p.gameObject;
+                    break;
+                case 2:
+                    p3 = p.gameObject;
+                    break;
+                case 3:
+                    p4 = p.gameObject;
+                    break;
+
+            }
+        }
+    }
+
     Vector3 newPosition = new Vector3(0,0,-1f);
     bool cameraPositionOnLeftWall = false;
     // Update is called once per frame
     void Update()
     {
+        if (p1 == null)
+        {
+            CheckForPlayers();
+            return;
+        }
         switch (playerCount)
         {
             case 1:
@@ -78,7 +108,10 @@ public class CameraController : MonoBehaviour
             }
             else
                 newPosition.x = cameraRightmostPos.transform.position.x;
-        }    
+        }
+        // Clamp to 0
+        if (newPosition.y < 0)
+            newPosition.y = 0;
 
         transform.position = newPosition;
     }

@@ -15,6 +15,8 @@ public class PlayerEntity : EntityBase
 
         playerText.text = "P" + (input.playerIndex + 1);
 
+        FindObjectOfType<LevelManager>().players.Add(gameObject);
+
         base.Start();
     }
 
