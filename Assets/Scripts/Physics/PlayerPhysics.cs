@@ -83,11 +83,12 @@ public class PlayerPhysics : MonoBehaviour
             if (Mathf.Abs(distanceFromOtherPlayer) <= playerSizeTimesTwo)
             {
                 fromOtherToThis.Normalize();
-                bool facingCorrectDirection = Mathf.Abs(fromOtherToThis.x) < Mathf.Abs(fromOtherToThis.x + movementController.facingDirection.x);
-
-                Debug.Log("Slapping Someone!");
-                player.m_rigidbody.AddForce(fromOtherToThis * slapForce);
-                hasSlappedSomeone = true;
+                if (Vector3.Angle(fromOtherToThis, movementController.facingDirection) < 40f) // 40f is max angle
+                {
+                    Debug.Log("Slapping Someone!");
+                    player.m_rigidbody.AddForce(fromOtherToThis * slapForce);
+                    hasSlappedSomeone = true;
+                }
             }
         }
         if (hasSlappedSomeone)
